@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-use crate::state::VaultState;
+use crate::{state::VaultState, ANCHOR_DISCRIMINATOR};
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
@@ -18,7 +18,7 @@ pub struct Initialize<'info> {
         payer = signer,
         seeds = [b"state", signer.key().as_ref()],
         bump,
-        space = 8 + VaultState::INIT_SPACE,
+        space = ANCHOR_DISCRIMINATOR + VaultState::INIT_SPACE,
     )]
     pub vault_state: Account<'info, VaultState>,
     pub system_program: Program<'info, System>,

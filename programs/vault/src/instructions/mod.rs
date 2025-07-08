@@ -1,9 +1,7 @@
 pub mod close;
-pub mod deposit;
 pub mod initialize;
-pub mod withdraw;
+pub mod payment;
 
 pub use close::*;
-pub use deposit::*;
 pub use initialize::*;
-pub use withdraw::*;
+pub use payment::*;

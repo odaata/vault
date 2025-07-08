@@ -4,6 +4,12 @@ use anchor_lang::{
 };
 use crate::state::VaultState;
 
+#[error_code]
+pub enum PaymentError {
+    #[msg("Not enough funds to pay for deposit")]
+    InsufficientFunds,
+}
+
 #[derive(Accounts)]
 pub struct Payment<'info> {
     #[account(mut)]
@@ -39,13 +45,14 @@ impl<'info> Payment<'info> {
     }
 
     pub fn withdraw(&mut self, amount: u64) -> Result<()> {
-        let cpi_program = self.system_program.to_account_info();
+        let rent_exempt: u64 = Rent::get()?.minimum_balance(self.vault.to_account_info().data_len());
+        require!(amount <= self.vault.lamports() + rent_exempt, PaymentError::InsufficientFunds);
 
+        let cpi_program = self.system_program.to_account_info();
         let cpi_accounts = Transfer {
             to: self.signer.to_account_info(),
             from: self.vault.to_account_info(),
         };
-
         let signing_seeds = [
             b"vault",
             self.vault_state.to_account_info().key.as_ref(),

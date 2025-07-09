@@ -7,11 +7,13 @@ settings:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
       '@coral-xyz/anchor':
         specifier: ^0.31.1
         version: 0.31.1(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
-    devDependencies:
+      '@solana/web3.js':
+        specifier: ^1.98.2
+        version: 1.98.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       '@types/bn.js':
         specifier: ^5.1.0
         version: 5.2.0
@@ -1934,7 +1936,7 @@ snapshots:
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 12.20.55
+      '@types/node': 24.0.10
 
   '@types/graceful-fs@4.1.9':
     dependencies:
@@ -1967,7 +1969,7 @@ snapshots:
 
   '@types/ws@7.4.7':
     dependencies:
-      '@types/node': 12.20.55
+      '@types/node': 24.0.10
 
   '@types/ws@8.18.1':
     dependencies:

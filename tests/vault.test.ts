@@ -24,8 +24,7 @@ describe("vault", () => {
       program.programId,
     );
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_vaultPDA, vaultBump] = PublicKey.findProgramAddressSync(
+    const [_, vaultBump] = PublicKey.findProgramAddressSync(
       [Buffer.from("vault"), vaultStatePDA.toBuffer()],
       program.programId,
     );
